@@ -1,0 +1,28 @@
+.wrapper {
+    background-color: rgb(63, 63, 63);
+    color: white;
+    font-size: 28px;
+    text-align: center;
+    width: 80%;
+    height: 0;
+    padding-bottom: 80%;
+    border-radius: 50%;
+    justify-self: center;
+    align-content: center;
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.text {
+    margin-top: 50%;
+    transform: translateY(-50%);
+    align-self: center;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.silver {
+    background-color: rgb(156, 151, 151);
+}

@@ -1,0 +1,17 @@
+.wrapper {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    background-color: transparent;
+    grid-template-areas: 
+    ". . . ."
+    ". . . ."
+    ". . . ."
+    ". . . ."
+    ". . . ."
+    "bd bd . .";
+
+    row-gap: 10px;
+    column-gap: 10px;
+}
