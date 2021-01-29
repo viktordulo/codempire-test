@@ -1,10 +1,8 @@
 import React from 'react';
+import { Button } from '../interfaces';
 
 import style from './ButtonDouble.module.css';
 
-interface Button {
-    text: string;
-}
 
 const ButtonDouble: React.FC<Button> = (props) => {
     return (
