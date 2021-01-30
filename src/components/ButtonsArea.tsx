@@ -7,8 +7,8 @@ import ButtonStandard from './ButtonStandard';
 const ButtonsArea: React.FC = () => {
     return (
         <div className={style.wrapper}>
-            <ButtonStandard text='AC' background='silver' type='functional' />
-            <ButtonStandard text='+/-' background='silver' type='functional' />
+            <ButtonStandard text='AC' background='silver' type='unary' />
+            <ButtonStandard text='+/-' background='silver' type='unary' />
             <ButtonStandard text='%' background='silver' type='functional' />
             <ButtonStandard text='/' background='orange' type='operand' />
             <ButtonStandard text='mc' type='functional' />
@@ -28,8 +28,8 @@ const ButtonsArea: React.FC = () => {
             <ButtonStandard text='3' type='digit' />
             <ButtonStandard text='+' background='orange' type='operand' />
             <ButtonDouble text='0' type='digit'/>
-            <ButtonStandard text=',' type='functional' />
-            <ButtonStandard text='=' background='orange' type='functional' />
+            <ButtonStandard text=',' type='unary' />
+            <ButtonStandard text='=' background='orange' type='unary' />
         </div>
     );
 }

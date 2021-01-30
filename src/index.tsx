@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import store from './redux/store';
 import { Provider } from 'react-redux'
-import { StateInterface } from './interfaces';
 
 const renderEntireTree = (state: any) => {
   ReactDOM.render(

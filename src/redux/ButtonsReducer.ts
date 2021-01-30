@@ -1,5 +1,4 @@
 import { ActionInterface } from './../interfaces';
-import { Store } from "redux";
 
 const initialState = {}
 

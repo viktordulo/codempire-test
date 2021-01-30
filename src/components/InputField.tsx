@@ -1,12 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import style from './InputField.module.css'
 
 const InputField: React.FC = () => {
 
-    const output = useSelector((state:any) => state.InputField.outputResult);
+    const output = useSelector((state: any) => state.InputField.outputResult);
 
     return (
         <div className = {style.wrapper}>

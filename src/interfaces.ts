@@ -1,11 +1,11 @@
 export interface ActionInterface {
-    type: 'digit' | 'operand' | 'functional';
+    type: 'digit' | 'operand' | 'functional' | 'unary';
     button: string;
 }
 
 export interface Button {
     text: string;
-    type: 'digit' | 'operand' | 'functional'
+    type: 'digit' | 'operand' | 'functional' | 'unary';
     background?: 'orange' | 'silver';
 }
 
@@ -16,7 +16,7 @@ export interface StateInterface {
     isRightOperandSet: boolean,
     rightOperand: string,
 
-    isOperatorSet: boolean,
+    isOperatorPressed: boolean,
     operator: string,
 
     outputResult: number
