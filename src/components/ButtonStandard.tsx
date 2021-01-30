@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import { Button } from '../interfaces';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, ActionInterface } from '../interfaces';
 
 import style from './ButtonStandard.module.css';
 
 
 const ButtonStandard: React.FC<Button> = (props) => {
 
-    const [leftOperand, setLeftOperand] = useState(0);
+    const dispatch = useDispatch();
 
     const makeAction = () => {
-        console.log(props.text);
-        setLeftOperand(+props.text);
+        const action: ActionInterface = {
+            type: props.type,
+            button: props.text
+        }
+        dispatch(action);
     }
 
     // Adding different background colors for buttons

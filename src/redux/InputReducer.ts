@@ -1,15 +1,24 @@
 import { Store } from 'redux';
-import { ActionInterface } from './../interfaces';
+import { ActionInterface, StateInterface } from './../interfaces';
 
-const initialState = {
-    leftOperand: 0,
-    rightOperand: 0,
-    operator: '+'
+const initialState: StateInterface = {
+    isLeftOperandSet: false,
+    leftOperand: '0',
+
+    isRightOperandSet: false,
+    rightOperand: '0',
+
+    isOperatorSet: false,
+    operator: '+',
+
+    outputResult: 0
 }
 
-const inputReducer = (state: any = initialState, action: ActionInterface) => {
+const inputReducer = (state: StateInterface = initialState, action: ActionInterface) => {
 
-    console.log(initialState.leftOperand)
+    if (action.type === 'digit') {
+        state.outputResult = +action.button;
+    }
     return state;
 }
 
