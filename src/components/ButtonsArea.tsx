@@ -9,7 +9,7 @@ const ButtonsArea: React.FC = () => {
         <div className={style.wrapper}>
             <ButtonStandard text='AC' background='silver' type='unary' />
             <ButtonStandard text='+/-' background='silver' type='unary' />
-            <ButtonStandard text='%' background='silver' type='functional' />
+            <ButtonStandard text='%' background='silver' type='unary' />
             <ButtonStandard text='/' background='orange' type='operand' />
             <ButtonStandard text='mc' type='functional' />
             <ButtonStandard text='mr' type='functional' />

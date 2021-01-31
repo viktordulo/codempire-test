@@ -12,12 +12,15 @@ export interface Button {
 export interface StateInterface {
     isLeftOperandSet: boolean,
     leftOperand: string,
-
-    isRightOperandSet: boolean,
     rightOperand: string,
 
     isOperatorPressed: boolean,
     operator: string,
 
-    outputResult: number
+    isEqualPressed: boolean,
+    isCommaPressed: boolean,
+
+    outputResult: number,
+
+    numberInMemory: number
 }

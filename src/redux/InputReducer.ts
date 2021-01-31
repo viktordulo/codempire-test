@@ -4,21 +4,29 @@ import { ActionInterface, StateInterface } from './../interfaces';
 const initialState: StateInterface = {
     isLeftOperandSet: false,
     leftOperand: '',
-
-    isRightOperandSet: false,
     rightOperand: '',
 
     isOperatorPressed: false,
     operator: '',
 
-    outputResult: 0
+    isEqualPressed: false,
+    isCommaPressed: false,
+
+    outputResult: 0,
+
+    numberInMemory: 0
 }
+
+let numberInMemory = 0;
 
 const inputReducer = (state: StateInterface = Object.assign({}, initialState), action: ActionInterface) => {
 
     switch (action.type) {
         case 'digit':
-            state.isOperatorPressed = false;
+            if (state.isEqualPressed && !state.isOperatorPressed && !state.isCommaPressed) {
+                state.leftOperand = '';
+                state.isLeftOperandSet = false;
+            }
             if (!state.isLeftOperandSet) {
                 state.leftOperand += action.button;
                 state.outputResult = +state.leftOperand
@@ -26,6 +34,8 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
                 state.rightOperand += action.button;
                 state.outputResult = +state.rightOperand;
             }
+            state.isEqualPressed = false;
+            state.isOperatorPressed = false;
 
             return state;
 
@@ -33,6 +43,7 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
             if (!state.isOperatorPressed) {
                 if (!state.isLeftOperandSet) {
                     state.isLeftOperandSet = true;
+                    state.isCommaPressed = false;
                 } else {
                     switch (state.operator) {
                         case '+':
@@ -68,6 +79,7 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
         case 'unary':
             switch (action.button) {
                 case '=':
+                    state.isEqualPressed = true;
                     if (state.operator && state.rightOperand) {
                         switch (state.operator) {
                             case '+':
@@ -94,6 +106,8 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
                                 break;
                         }
                     }
+                    state.operator = '';
+                    state.isCommaPressed = false;
                     return state;
 
                 case '+/-':
@@ -108,11 +122,41 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
                     return state;
 
                 case ',':
+                    if (state.isEqualPressed) {
+                        state.isLeftOperandSet = false;
+                        state.leftOperand = '0';
+                    }
+                    if (!state.isCommaPressed) {
+                        if (!state.isLeftOperandSet) {
+                            state.leftOperand += '.';
+                        } else {
+                            state.rightOperand += '.';
+                        }
+                    }
+                    state.isCommaPressed = true;
 
                     return state;
 
                 case 'AC':
                     state = Object.assign({}, initialState);
+                    return state;
+
+                case '%':
+                    if (state.isEqualPressed) {
+                        state.leftOperand = (+state.leftOperand / 100).toString();
+                        state.outputResult = +state.leftOperand;
+                    }
+                    if (!state.isLeftOperandSet || (state.isLeftOperandSet && state.isOperatorPressed)) {
+                        state.leftOperand = (+state.leftOperand / 100).toString();
+                        state.isLeftOperandSet = true;
+                        state.outputResult = +state.leftOperand;
+                        state.isOperatorPressed = false;
+                    } else if (!state.isOperatorPressed && !state.isEqualPressed) {
+                        state.rightOperand = (+state.rightOperand / 100).toString();
+                        state.outputResult = +state.rightOperand;
+                    }
+                    state.isEqualPressed = false;
+
                     return state;
 
                 default:
