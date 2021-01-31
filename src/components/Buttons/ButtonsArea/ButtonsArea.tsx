@@ -1,9 +1,11 @@
 import React from 'react';
-import ButtonDouble from './ButtonDouble';
+import ButtonDouble from '../ButtonDouble/ButtonDouble';
 
 import style from './ButtonsArea.module.css';
-import ButtonStandard from './ButtonStandard';
+import ButtonStandard from '../ButtonStandard/ButtonStandard';
 
+
+// Component which includes all buttons.
 const ButtonsArea: React.FC = () => {
     return (
         <div className={style.wrapper}>

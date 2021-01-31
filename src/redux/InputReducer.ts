@@ -1,6 +1,7 @@
-
 import { ActionInterface, StateInterface } from './../interfaces';
 
+
+// Starting point for the state.
 const initialState: StateInterface = {
     isLeftOperandSet: false,
     leftOperand: '',
@@ -17,12 +18,18 @@ const initialState: StateInterface = {
     numberInMemory: 0
 }
 
+
+/* Variable to save the memory state even when we clear the state with 'AC' button. */
 let numberInMemory = 0;
 
+
+// Manages the state when buttons are pressed.
 const inputReducer = (state: StateInterface = Object.assign({}, initialState), action: ActionInterface) => {
 
+
+    // Check all possible button types.
     switch (action.type) {
-        case 'digit':
+        case 'digit': // If number pressed.
             if (state.isEqualPressed && !state.isOperatorPressed && !state.isCommaPressed) {
                 state.leftOperand = '';
                 state.isLeftOperandSet = false;
@@ -39,7 +46,7 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
 
             return state;
 
-        case 'operand':
+        case 'operand': // If binary operator pressed (+, -, *, /).
             if (!state.isOperatorPressed) {
                 if (!state.isLeftOperandSet) {
                     state.isLeftOperandSet = true;
@@ -76,7 +83,7 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
 
             return state;
 
-        case 'unary':
+        case 'unary': // If unary operator pressed (=  %  ,  AC  +/-).
             switch (action.button) {
                 case '=':
                     state.isEqualPressed = true;
@@ -152,8 +159,30 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
                         state.outputResult = +state.leftOperand;
                         state.isOperatorPressed = false;
                     } else if (!state.isOperatorPressed && !state.isEqualPressed) {
-                        state.rightOperand = (+state.rightOperand / 100).toString();
-                        state.outputResult = +state.rightOperand;
+                        switch (state.operator) {
+                            case '-':
+                                state.rightOperand = (+state.rightOperand * +state.leftOperand / 100).toString();
+                                state.outputResult = +state.rightOperand;
+                                break;
+
+                            case '+':
+                                state.rightOperand = (+state.rightOperand * +state.leftOperand / 100).toString();
+                                state.outputResult = +state.rightOperand;
+                                break;
+
+                            case 'X':
+                                state.rightOperand = (+state.rightOperand / 100).toString();
+                                state.outputResult = +state.rightOperand;
+                                break;
+
+                            case '/':
+                                state.rightOperand = (+state.rightOperand / 100).toString();
+                                state.outputResult = +state.rightOperand;
+                                break;
+
+                            default:
+                                break;
+                        }
                     }
                     state.isEqualPressed = false;
 
@@ -162,6 +191,37 @@ const inputReducer = (state: StateInterface = Object.assign({}, initialState), a
                 default:
                     return state;
             }
+
+        case 'functional': // If memory button pressed.
+            switch (action.button) {
+                case 'm+':
+                    numberInMemory += state.outputResult;
+                    state.numberInMemory += numberInMemory;
+                    return state;
+
+                case 'm-':
+                    numberInMemory -= state.outputResult;
+                    state.numberInMemory -= numberInMemory;
+                    return state;
+
+                case 'mc':
+                    numberInMemory = 0;
+                    state.numberInMemory = numberInMemory;
+                    return state;
+
+                case 'mr':
+                    state.outputResult = numberInMemory;
+                    state.leftOperand = state.outputResult.toString();
+                    state.isLeftOperandSet = true;
+                    state.rightOperand = '';
+                    state.operator = '';
+                    state.isCommaPressed = false;
+                    return state;
+
+                default:
+                    return state;
+            }
+
 
         default:
             return state;

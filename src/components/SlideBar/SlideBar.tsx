@@ -1,7 +1,7 @@
 import React from 'react';
 
 import style from './SlideBar.module.css'
-import '../fonts.css'
+import '../../fonts.css'
 
 const SlideBar: React.FC = () => {
     return (

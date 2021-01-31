@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, ActionInterface } from '../interfaces';
+import { Button, ActionInterface } from '../../../interfaces';
 
 import style from './ButtonStandard.module.css';
 
@@ -9,6 +9,7 @@ const ButtonStandard: React.FC<Button> = (props) => {
 
     const dispatch = useDispatch();
 
+    // Gives the button type and button sign to the reducer when clicked.
     const makeAction = () => {
         const action: ActionInterface = {
             type: props.type,
@@ -17,7 +18,7 @@ const ButtonStandard: React.FC<Button> = (props) => {
         dispatch(action);
     }
 
-    // Adding different background colors for buttons
+    // Adding different background colors for buttons.
     let bgColor = `${style.wrapper}`;
     if (props.background === 'silver') bgColor += ` ${style.silver}`;
     if (props.background === 'orange') bgColor += ` ${style.orange}`;

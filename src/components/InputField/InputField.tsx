@@ -5,6 +5,7 @@ import style from './InputField.module.css'
 
 const InputField: React.FC = () => {
 
+    // Takes the output of the state.
     const output = useSelector((state: any) => state.InputField.outputResult);
 
     return (

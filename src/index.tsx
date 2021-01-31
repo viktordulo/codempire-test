@@ -18,6 +18,8 @@ const renderEntireTree = (state: any) => {
 
 renderEntireTree(store.getState());
 
+
+// Rewrite the UI when state changes.
 store.subscribe(() => {
   let state = store.getState();
   renderEntireTree(state);
